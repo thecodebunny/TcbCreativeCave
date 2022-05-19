@@ -18,5 +18,12 @@
   "asset": [
     "@Storefront",
     "app/storefront/src/assets"
-  ]
+  ],
+  "configInheritance":[
+    "@Storefront",
+    "@OtherTheme"
+  ],
+  "config": {
+
+  }
 }
