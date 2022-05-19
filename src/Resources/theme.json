@@ -24,6 +24,10 @@
     "@OtherTheme"
   ],
   "config": {
-
+    "fields" : {
+      "tcb-color-brand-primary": {
+        "value": "#00ff00"
+      }
+    }
   }
 }
