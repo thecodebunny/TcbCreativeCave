@@ -1,5 +1,5 @@
 {
-  "name": "TcbCreativeCave",
+  "name": "Creative Cave Modern, Creative, Responsive Theme by TheCodeBunny",
   "author": "TheCodeBunny",
   "views": [
      "@Storefront",
@@ -24,10 +24,21 @@
     "@OtherTheme"
   ],
   "config": {
+
+    "blocks": {
+      "tcb-settings-gf": {
+        "label": {
+          "en-GB": "Google Font settings",
+          "de-DE": "Google Font Einstellungen"
+        }
+      }
+    },
+
     "fields" : {
       "sw-color-brand-primary": {
         "value": "#00ff00"
       }
-    }
+    },
+
   }
 }
