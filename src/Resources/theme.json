@@ -1,44 +1,41 @@
 {
-  "name": "Creative Cave Modern, Creative, Responsive Theme by TheCodeBunny",
-  "author": "TheCodeBunny",
-  "views": [
-     "@Storefront",
-     "@Plugins",
-     "@TcbCreativeCave"
+  "name":"Creative Cave Modern, Creative, Responsive Theme by TheCodeBunny",
+  "author":"TheCodeBunny",
+  "views":[
+    "@Storefront",
+    "@Plugins",
+    "@TcbCreativeCave"
   ],
-  "style": [
+  "style":[
     "app/storefront/src/scss/overrides.scss",
     "@Storefront",
     "app/storefront/src/scss/base.scss"
   ],
-  "script": [
+  "script":[
     "@Storefront",
     "app/storefront/dist/storefront/js/tcb-creative-cave.js"
   ],
-  "asset": [
+  "asset":[
     "@Storefront",
     "app/storefront/src/assets"
   ],
-  "configInheritance": [
+  "configInheritance":[
     "@Storefront",
     "@OtherTheme"
   ],
-  "config": {
-
-    "blocks": {
-      "tcb-settings-gf": {
-        "label": {
-          "en-GB": "Google Font settings",
-          "de-DE": "Google Font Einstellungen"
+  "config":{
+    "blocks":{
+      "tcb-settings-gf":{
+        "label":{
+          "en-GB":"Google Font settings",
+          "de-DE":"Google Font Einstellungen"
         }
       }
     },
-
-    "fields" : {
-      "sw-color-brand-primary": {
-        "value": "#00ff00"
+    "fields":{
+      "sw-color-brand-primary":{
+        "value":"#00ff00"
       }
-    },
-
+    }
   }
 }
