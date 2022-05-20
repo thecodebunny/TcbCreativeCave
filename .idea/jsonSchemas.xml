@@ -3,12 +3,11 @@
   <component name="JsonSchemaMappingsProjectConfiguration">
     <state>
       <map>
-        <entry key="JSON Schema version 6">
+        <entry key="Shopware 6 Configuration">
           <value>
             <SchemaInfo>
-              <option name="name" value="JSON Schema version 6" />
-              <option name="relativePathToSchema" value="http://json-schema.org/draft-06/schema" />
-              <option name="schemaVersion" value="JSON Schema version 6" />
+              <option name="name" value="Shopware 6 Configuration" />
+              <option name="relativePathToSchema" value="https://raw.githubusercontent.com/shopware/platform/trunk/config-schema.json" />
               <option name="applicationDefined" value="true" />
               <option name="patterns">
                 <list>
