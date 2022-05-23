@@ -24,17 +24,36 @@
     "@OtherTheme"
   ],
   "config":{
+
     "blocks":{
-      "tcb-settings-gf":{
+      "tcb-google-settings":{
         "label":{
-          "en-GB":"Google Font settings",
-          "de-DE":"Google Font Einstellungen"
+          "en-GB":"Google Related Settings",
+          "de-DE":"Google Einstellungen"
         }
       }
     },
+
     "fields":{
-      "sw-color-brand-primary":{
+
+       "sw-color-brand-primary":{
         "value":"#00ff00"
+      },
+
+
+      "tcb-google-fonts": {
+        "label": {
+          "de-DE": "Google Font einbinden",
+          "en-GB": "Add google font"
+        },
+        "type": "switch",
+        "value": true,
+        "editable": true,
+        "block": "tcb-google-settings",
+        "helpText": {
+          "en-GB": "Activate or deactivate google fonts. When you use Google fonts, you have to update your privacy policy.",
+          "de-DE": "Aktivieren oder deaktivieren Sie die Google Fonts. Des Weiteren beachten Sie bitte, dass Sie Ihre Datenschutzerklärung durch das Nutzen der Google Font aktualisieren müssen."
+        }
       }
     }
   }
