@@ -18,9 +18,32 @@ Shopware.Service('cmsService').registerCmsBlock({
     component: 'sw-cms-block-tcbslider',
     previewComponent: 'sw-cms-preview-tcbslider',
     defaultConfig: {
-
+        marginBottom: '20px',
+        marginTop: '20px',
+        marginLeft: '20px',
+        marginRight: '20px',
+        sizingMode: 'boxed'
     },
     slots: {
-        slider: 'slider'
-    }
+        tcbSlider: {
+            type: 'tcbslider',
+            default: {
+                config: {},
+                data: {
+                    tcbSliderItems: {
+                        source: 'static',
+                        value: [
+                            {
+                                url: 'public/img/slide.jpg',
+                                newTab: false,
+                                mediaId: null,
+                                fileName: '',
+                                mediaUrl: null,
+                            },
+                        ],
+                    },
+                },
+            },
+        },
+    },
 });

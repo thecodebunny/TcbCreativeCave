@@ -1,0 +1,143 @@
+/*!
+ * Copyright (c) 2022. TheCodeBunny (Hemang Vyas) All rights reserved.
+ *  
+ *  Unauthorized copying of this file, via any medium is strictly prohibited Proprietary and confidential.
+ *
+ * Author : Hemang Vyas (TheCodeBunny)
+ * Website: https://hemangvyas.com
+ * Email: hemang@hemangvyas.com
+ */
+
+@import "~scss/variables";
+
+.sw-cms-el-tcbslider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  align-items: start;
+
+  &.has--outside-arrows {
+    width: calc(100% - 48px);
+    margin: 0 auto;
+  }
+
+  .sw-cms-el-tcbslider__image-box {
+    display: grid;
+    position: relative;
+
+    .sw-cms-el-tcbslider__image {
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    &.is--cover {
+      width: 100%;
+
+      .sw-cms-el-tcbslider__image {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+    }
+
+    &.is--dot-outside {
+      .sw-cms-el-tcbslider__image {
+        padding-bottom: 30px;
+      }
+    }
+  }
+}
+
+.sw-cms-el-tcbslider__navigation {
+  &.is--nav-outside {
+    justify-content: center;
+    background: #fff;
+    border-radius: 5px;
+    padding: 15px;
+  }
+
+  .sw-cms-el-tcbslider__navigation-button {
+    cursor: pointer;
+    color: $color-gray-400;
+
+    &:hover {
+      color: $color-gray-900;
+    }
+  }
+}
+
+.sw-cms-el-tcbslider__navigation-arrows {
+  .sw-cms-el-tcbslider__navigation-button {
+    position: absolute;
+    top: 50%;
+  }
+
+  &.is--dot-outside {
+    .sw-cms-el-tcbslider__navigation-button {
+      top: calc(50% - 15px);
+    }
+  }
+
+  &.is--nav-inside {
+    .sw-cms-el-tcbslider__navigation-button {
+      &:first-child {
+        left: 5px;
+      }
+
+      &:last-child {
+        right: 5px;
+      }
+    }
+  }
+
+  &.is--nav-outside {
+    .sw-cms-el-tcbslider__navigation-button {
+      &:first-child {
+        left: -25px;
+      }
+
+      &:last-child {
+        right: -25px;
+      }
+    }
+  }
+}
+
+.sw-cms-el-tcbslider__navigation-dots {
+  .sw-cms-el-tcbslider__navigation-buttons {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    grid-auto-flow: column dense;
+    grid-auto-columns: min-content;
+
+    .sw-cms-el-tcbslider__navigation-button {
+      width: 15px;
+      height: 15px;
+      background: $color-gray-400;
+      border-radius: 100%;
+      margin: 0 3px;
+
+      &.is--active {
+        background: $color-gray-900;
+      }
+
+      &:hover {
+        background: $color-gray-900;
+      }
+    }
+  }
+
+  &.is--dot-outside {
+    .sw-cms-el-tcbslider__navigation-buttons {
+      bottom: -6px;
+    }
+  }
+}

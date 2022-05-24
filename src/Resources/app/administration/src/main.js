@@ -8,4 +8,5 @@
  * Email: hemang@hemangvyas.com
  */
 
+import './module/sw-cms/elements/tcbslider';
 import './module/sw-cms/blocks/image/tcbslider';

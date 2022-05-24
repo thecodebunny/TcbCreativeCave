@@ -1,9 +1,26 @@
 {% block sw_cms_preview_tcbslider %}
     <div class="sw-cms-preview-tcbslider">
         <div>
-            <h2>
-                TheCodeBunny Advanced Slider
+            <h2 class="tcbslider-heading">
+                TheCodeBunny <br/> Advanced Slider
             </h2>
+            <sw-icon
+                    class="tcbslider-arrow left"
+                    name="default-arrow-circle-left"
+                    size="25"
+            />
+            <img
+                    :src="'tcbcreativecave/img/slide.jpg' | asset"
+                    alt=""
+            />
+            <p class="tcbslider-desc">
+                This is sample description,<br/> you can add your own.
+            </p>
+            <sw-icon
+                    class="tcbslider-arrow right"
+                    name="default-arrow-circle-right"
+                    size="25"
+            />
         </div>
     </div>
 {% endblock %}

@@ -1,0 +1,99 @@
+{% block sw_cms_element_tcbslider %}
+    <div
+            class="sw-cms-el-tcbslider"
+            :class="outsideNavArrows"
+            :style="verticalAlignStyle"
+    >
+        <h2 class="tcbslider-heading">
+            TheCodeBunny <br/> Advanced Slider
+        </h2>
+        {% block sw_cms_element_tcbslider_img %}
+            <div
+                    class="sw-cms-el-tcbslider__image-box"
+                    :class="[displayModeClass, navDotsClass]"
+                    :style="styles"
+            >
+                <img
+                        class="sw-cms-el-tcbslider__image"
+                        :src="imgSrc"
+                        alt=""
+                >
+            </div>
+        {% endblock %}
+
+        <p class="tcbslider-desc">
+            This is sample description,<br/> you can add your own.
+        </p>
+        <template v-if="element.data !== null">
+            {% block sw_cms_element_tcbslider_nav %}
+                <div class="sw-cms-el-tcbslider__navigation">
+                    {% block sw_cms_element_tcbslider_nav_dots %}
+                        <div
+                                v-if="element.config.navigationDots.value !== null"
+                                class="sw-cms-el-tcbslider__navigation-dots"
+                                :class="navDotsClass"
+                        >
+                            <div class="sw-cms-el-tcbslider__navigation-buttons">
+                                <template v-if="tcbSliderItems && tcbSliderItems.length > 0">
+                                    <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
+                                    <div
+                                            v-for="(tcbSliderItem, index) in tcbSliderItems"
+                                            :key="index"
+                                            :class="activeButtonClass(tcbSliderItem.media.url)"
+                                            class="sw-cms-el-tcbslider__navigation-button"
+                                            @click="setSliderItem(tcbSliderItem.media, index)"
+                                    ></div>
+                                </template>
+                                <template v-else>
+                                    <div class="sw-cms-el-tcbslider__navigation-button is--active"></div>
+                                    <div class="sw-cms-el-tcbslider__navigation-button"></div>
+                                    <div class="sw-cms-el-tcbslider__navigation-button"></div>
+                                </template>
+                            </div>
+                        </div>
+                    {% endblock %}
+
+                    {% block sw_cms_element_tcbslider_nav_arrows %}
+                        <div
+                                v-if="element.config.navigationArrows.value !== null"
+                                class="sw-cms-el-tcbslider__navigation-arrows"
+                                :class="[navArrowsClass, navDotsClass]"
+                        >
+                            <sw-icon
+                                    class="sw-cms-el-tcbslider__navigation-button"
+                                    name="default-arrow-head-left"
+                                    size="24"
+                                    @click="setSliderArrowItem(-1)"
+                            />
+                            <sw-icon
+                                    class="sw-cms-el-tcbslider__navigation-button"
+                                    name="default-arrow-head-right"
+                                    size="24"
+                                    @click="setSliderArrowItem()"
+                            />
+                        </div>
+                    {% endblock %}
+                </div>
+            {% endblock %}
+        </template>
+
+        <template v-else>
+            {% block sw_cms_element_tcbslider_nav_default %}
+                <div class="sw-cms-el-tcbslider__navigation">
+                    <div class="sw-cms-el-tcbslider__navigation-arrows is--nav-outside">
+                        <sw-icon
+                                class="sw-cms-el-tcbslider__navigation-button"
+                                name="default-arrow-head-left"
+                                size="24"
+                        />
+                        <sw-icon
+                                class="sw-cms-el-tcbslider__navigation-button"
+                                name="default-arrow-head-right"
+                                size="24"
+                        />
+                    </div>
+                </div>
+            {% endblock %}
+        </template>
+    </div>
+{% endblock %}

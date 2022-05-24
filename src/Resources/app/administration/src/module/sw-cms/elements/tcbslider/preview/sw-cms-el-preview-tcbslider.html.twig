@@ -1,0 +1,24 @@
+{% block sw_cms_element_tcbslider_preview %}
+    <div class="sw-cms-el-preview-tcbslider">
+        <h2 class="tcbslider-heading">
+            TheCodeBunny <br/> Advanced Slider
+        </h2>
+        <sw-icon
+                name="default-arrow-circle-left"
+                size="10"
+        />
+        <div>
+            <img
+                    :src="'tcbcreativecave/img/slide.jpg' | asset"
+                    alt=""
+            >
+        </div>
+        <p class="tcbslider-desc">
+            This is sample description,<br/> you can add your own.
+        </p>
+        <sw-icon
+                name="default-arrow-circle-right"
+                size="10"
+        />
+    </div>
+{% endblock %}

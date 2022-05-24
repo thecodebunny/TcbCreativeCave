@@ -1,0 +1,14 @@
+{
+  "sw-cms": {
+    "elements": {
+      "tcbSlider": {
+        "label":"TheCodeBunny Advanced Slider",
+        "config": {
+          "slides": {
+            "slide": "Slide"
+          }
+        }
+      }
+    }
+  }
+}

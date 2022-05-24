@@ -9,6 +9,43 @@
  */
 
 .sw-cms-preview-tcbslider {
-  padding: 50px;
-  min-height: 300px
+    padding: 10px;
+    position: relative;
+
+    .tcbslider-heading {
+        position: absolute;
+        top: 25%;
+        right: 10%;
+        color: #FFFFFF;
+        text-transform: uppercase;
+        width: 75%;
+        text-align: right;
+    }
+
+    .tcbslider-desc {
+        position: absolute;
+        bottom: 25%;
+        width: 75%;
+        text-align: right;
+        right: 7%;
+        background: rgba(255,255,255,0.5);
+        padding: 10px;
+        color: #0B7697
+    }
+
+    .tcbslider-arrow {
+        position: absolute;
+        top: 45%;
+        background: rgba(255,255,255,0.5);
+        padding: 5px;
+        border-radius: 100%;
+
+        &.left {
+            left: 10px;
+        }
+
+        &.right {
+            right: 10px;
+        }
+    }
 }
