@@ -5,7 +5,24 @@
         "label":"TheCodeBunny Advanced Slider",
         "config": {
           "slides": {
-            "slide": "Slide"
+            "slide1": "Slide 1",
+            "slideImage": "Slide Image",
+            "slideHeading": "Slide Header"
+          },
+          "settings": {
+            "settings": "settings",
+            "navigationArrows": "Navigation Arrows",
+            "displayMode": "Display Mode",
+            "displayModeStandard": "Standard",
+            "displayModeCover": "Cover",
+            "displayModeContain": "Contain",
+            "minHeight": "Minimum Height",
+            "verticalAlign": "Vertical Align",
+            "verticalAlignTop": "Top",
+            "verticalAlignCenter": "Middle",
+            "verticalAlignBottom": "Bottom",
+            "enterUrl": "Enter Url",
+            "linkNewTab": "Open Link in New Tab?"
           }
         }
       }

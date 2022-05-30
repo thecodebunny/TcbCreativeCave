@@ -15,7 +15,7 @@
             >
                 <img
                         class="sw-cms-el-tcbslider__image"
-                        :src="imgSrc"
+                        :src="mediaUrl"
                         alt=""
                 >
             </div>
@@ -33,23 +33,6 @@
                                 class="sw-cms-el-tcbslider__navigation-dots"
                                 :class="navDotsClass"
                         >
-                            <div class="sw-cms-el-tcbslider__navigation-buttons">
-                                <template v-if="tcbSliderItems && tcbSliderItems.length > 0">
-                                    <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
-                                    <div
-                                            v-for="(tcbSliderItem, index) in tcbSliderItems"
-                                            :key="index"
-                                            :class="activeButtonClass(tcbSliderItem.media.url)"
-                                            class="sw-cms-el-tcbslider__navigation-button"
-                                            @click="setSliderItem(tcbSliderItem.media, index)"
-                                    ></div>
-                                </template>
-                                <template v-else>
-                                    <div class="sw-cms-el-tcbslider__navigation-button is--active"></div>
-                                    <div class="sw-cms-el-tcbslider__navigation-button"></div>
-                                    <div class="sw-cms-el-tcbslider__navigation-button"></div>
-                                </template>
-                            </div>
                         </div>
                     {% endblock %}
 

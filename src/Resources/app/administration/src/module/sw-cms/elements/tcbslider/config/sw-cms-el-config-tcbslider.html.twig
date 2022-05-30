@@ -1,5 +1,6 @@
 {% block sw_cms_element_tcbslider_config %}
     <div class="sw-cms-el-config-tcbslider">
+        <h2>I AM HERE!</h2>
         {% block sw_cms_element_tcbslider_config_tabs %}
             <sw-tabs
                     position-identifier="sw-cms-element-config-tcbslider"
@@ -7,100 +8,87 @@
                     default-item="slide1"
             >
                 <template slot-scope="{ active }">
-                    {% block sw_cms_element_tcbslider_config_tab_slide_1 %}
+                    {% block sw_cms_element_tcbslider_config_tab_slide1 %}
                         <sw-tabs-item
-                                :title="$tc('sw-cms.elements.tcbSlider.config.slides.slide') 1"
+                                :title="$tc('sw-cms.elements.tcbSlider.config.slides.slide1')"
                                 name="slide1"
                                 :active-tab="active"
                         >
-                            {{ $tc('sw-cms.elements.tcbSlider.config.slidses.slide') }} 1
+                            {{ $tc('sw-cms.elements.tcbSlider.config.slides.slide1') }}
                         </sw-tabs-item>
                     {% endblock %}
-                    {% block sw_cms_element_tcbslider_config_tab_slide_2 %}
+                    {% block sw_cms_element_tcbslider_config_tab_slide2 %}
                         <sw-tabs-item
-                                :title="$tc('sw-cms.elements.tcbSlider.config.slides.slide') 2"
-                                name="slide1"
+                                :title="$tc('sw-cms.elements.tcbSlider.config.slides.slide2')"
+                                name="slide2"
                                 :active-tab="active"
                         >
-                            {{ $tc('sw-cms.elements.tcbSlider.config.slidses.slide') }} 2
+                            {{ $tc('sw-cms.elements.tcbSlider.config.slides.slide2') }}
                         </sw-tabs-item>
                     {% endblock %}
                     {% block sw_cms_element_tcbslider_config_tab_options %}
                         <sw-tabs-item
-                                :title="$tc('sw-cms.elements.general.config.tab.settings')"
+                                :title="$tc('sw-cms.elements.tcbSlider.config.settings.settings')"
                                 name="settings"
                                 :active-tab="active"
                         >
-                            {{ $tc('sw-cms.elements.general.config.tab.settings') }}
+                            {{ $tc('sw-cms.elements.tcbSlider.config.settings.settings') }}
                         </sw-tabs-item>
                     {% endblock %}
                 </template>
 
                 <template
-                        slot="slide1"
+                        slot="content"
                         slot-scope="{ active }"
                 >
                     {% block sw_cms_element_tcbslider_config_slide1 %}
                         <sw-container
                                 v-if="active === 'slide1'"
-                                class="sw-cms-el-config-tcbslider__tab-content"
+                                class="sw-cms-el-config-tcbslider__tab-slide"
                         >
-                            {% block sw_cms_element_tcbslider_config_media_selection %}
-                                <sw-media-upload-v2
-                                        :entity-media-items="mediaItems"
-                                        :entity="entity"
-                                        :upload-tag="uploadTag"
-                                        :allow-multi-select="false"
-                                        :default-folder-name="defaultFolderName"
-                                        @handle-upload="onImageUpload"
-                                        @item-remove="onItemRemove"
-                                        @open-sidebar="onOpenMediaModal"
-                                />
-                            {% endblock %}
 
-                            {% block sw_cms_element_tcbslider_config_media_modal %}
-                                <sw-media-modal-v2
-                                        v-if="mediaModalIsOpen"
-                                        variant="regular"
-                                        :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
-                                        :entity-context="cmsPageState.entityName"
-                                        :initial-folder-id="cmsPageState.defaultMediaFolderId"
-                                        @media-upload-remove-image="onItemRemove"
-                                        @media-modal-selection-change="onMediaSelectionChange"
-                                        @modal-close="onCloseMediaModal"
+                             {% block sw_cms_element_tcbslider_config_slide1_image %}
+                                 <sw-media-upload-v2
+                                                :entity-media-items="mediaItems"
+                                                :entity="entity"
+                                                :upload-tag="uploadTag"
+                                                :allow-multi-select="false"
+                                                :default-folder-name="TheCodeBunny Advanced Slider"
+                                 />
+                             {% endblock %}
+
+                             {% block sw_cms_element_tcbslider_config_slide1_heading %}
+                                <sw-text-field
+                                        v-model="element.config.tcbSlide1Title.value"
+                                        :label="$tc('sw-cms.elements.tcbSlider.config.label.slideHeading') + ' 1'"
+                                        :placeholder="$tc('sw-cms.elements.tcbSlider.config.label.slideImage') + ' 1'"
+                                        @input="onChangeMinHeight"
                                 />
-                            {% endblock %}
+                             {% endblock %}
                         </sw-container>
                     {% endblock %}
 
-                    {% block sw_cms_element_tcbslider_config_slide1 %}
+                    {% block sw_cms_element_tcbslider_config_slide2 %}
                         <sw-container
-                                v-if="active === 'slide1'"
-                                class="sw-cms-el-config-tcbslider__tab-content"
+                                v-if="active === 'slide2'"
+                                class="sw-cms-el-config-tcbslider__tab-slide"
                         >
-                            {% block sw_cms_element_tcbslider_config_media_selection %}
+                            {% block sw_cms_element_tcbslider_config_slide2_image %}
                                 <sw-media-upload-v2
                                         :entity-media-items="mediaItems"
                                         :entity="entity"
                                         :upload-tag="uploadTag"
                                         :allow-multi-select="false"
-                                        :default-folder-name="defaultFolderName"
-                                        @handle-upload="onImageUpload"
-                                        @item-remove="onItemRemove"
-                                        @open-sidebar="onOpenMediaModal"
+                                        :default-folder-name="TheCodeBunny Advanced Slider"
                                 />
                             {% endblock %}
 
-                            {% block sw_cms_element_tcbslider_config_media_modal %}
-                                <sw-media-modal-v2
-                                        v-if="mediaModalIsOpen"
-                                        variant="regular"
-                                        :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
-                                        :entity-context="cmsPageState.entityName"
-                                        :initial-folder-id="cmsPageState.defaultMediaFolderId"
-                                        @media-upload-remove-image="onItemRemove"
-                                        @media-modal-selection-change="onMediaSelectionChange"
-                                        @modal-close="onCloseMediaModal"
+                            {% block sw_cms_element_tcbslider_config_slide2_heading %}
+                                <sw-text-field
+                                        v-model="element.config.tcbSlide1Title.value"
+                                        :label="$tc('sw-cms.elements.tcbSlider.config.label.slideHeading') + ' 1'"
+                                        :placeholder="$tc('sw-cms.elements.tcbSlider.config.label.slideImage') + ' 1'"
+                                        @input="onChangeMinHeight"
                                 />
                             {% endblock %}
                         </sw-container>
@@ -116,53 +104,7 @@
                                 {% block sw_cms_element_image_gallery_config_settings_display_mode %}
                                     <div class="sw-cms-el-config-tcbslider__setting-option">
 
-                                        {% block sw_cms_element_image_gallery_config_settings_display_mode_select %}
-                                            <sw-select-field
-                                                    v-model="element.config.displayMode.value"
-                                                    :label="$tc('sw-cms.elements.general.config.label.displayMode')"
-                                                    class="sw-cms-el-config-tcbslider__setting-display-mode"
-                                                    @change="onChangeDisplayMode"
-                                            >
-                                                <option value="standard">
-                                                    {{ $tc('sw-cms.elements.general.config.label.displayModeStandard') }}
-                                                </option>
-                                                <option value="cover">
-                                                    {{ $tc('sw-cms.elements.general.config.label.displayModeCover') }}
-                                                </option>
-                                                <option value="contain">
-                                                    {{ $tc('sw-cms.elements.general.config.label.displayModeContain') }}
-                                                </option>
-                                            </sw-select-field>
-                                        {% endblock %}
 
-                                        {% block sw_cms_element_image_gallery_config_settings_min_height %}
-                                            <sw-text-field
-                                                    v-model="element.config.minHeight.value"
-                                                    :label="$tc('sw-cms.elements.image.config.label.minHeight')"
-                                                    :placeholder="$tc('sw-cms.elements.image.config.label.minHeight')"
-                                                    :disabled="element.config.displayMode.value !== 'cover'"
-                                                    @input="onChangeMinHeight"
-                                            />
-                                        {% endblock %}
-
-                                        {% block sw_cms_element_image_gallery_config_settings_vertical_align %}
-                                            <sw-select-field
-                                                    v-model="element.config.verticalAlign.value"
-                                                    :label="$tc('sw-cms.elements.general.config.label.verticalAlign')"
-                                                    :placeholder="$tc('sw-cms.elements.general.config.label.verticalAlign')"
-                                                    :disabled="element.config.displayMode.value === 'cover'"
-                                            >
-                                                <option value="flex-start">
-                                                    {{ $tc('sw-cms.elements.general.config.label.verticalAlignTop') }}
-                                                </option>
-                                                <option value="center">
-                                                    {{ $tc('sw-cms.elements.general.config.label.verticalAlignCenter') }}
-                                                </option>
-                                                <option value="flex-end">
-                                                    {{ $tc('sw-cms.elements.general.config.label.verticalAlignBottom') }}
-                                                </option>
-                                            </sw-select-field>
-                                        {% endblock %}
                                     </div>
                                 {% endblock %}
 
@@ -170,91 +112,19 @@
                                     <div class="sw-cms-el-config-tcbslider__setting-navigations sw-cms-el-config-tcbslider__setting-option">
                                         <div class="sw-cms-el-config-tcbslider__settings-navigation">
 
-                                            {% block sw_cms_element_tcbslider_config_settings_navigation_arrow_position %}
-                                                <sw-field
-                                                        v-model="element.config.navigationArrows.value"
-                                                        type="select"
-                                                        :label="$tc('sw-cms.elements.imageSlider.config.label.navigationArrows')"
-                                                        @change="emitUpdateEl"
-                                                >
 
-                                                    <option :value="null">
-                                                        {{ $tc('sw-cms.elements.imageSlider.config.label.navigationPositionNone') }}
-                                                    </option>
-                                                    <option value="inside">
-                                                        {{ $tc('sw-cms.elements.imageSlider.config.label.navigationPositionInside') }}
-                                                    </option>
-                                                    <option value="outside">
-                                                        {{ $tc('sw-cms.elements.imageSlider.config.label.navigationPositionOutside') }}
-                                                    </option>
-                                                </sw-field>
-                                            {% endblock %}
                                         </div>
 
                                         <div class="sw-cms-el-config-tcbslider__settings-navigation">
 
-                                            {% block sw_cms_element_tcbslider_config_settings_navigation_dots_position %}
-                                                <sw-field
-                                                        v-model="element.config.navigationDots.value"
-                                                        type="select"
-                                                        :label="$tc('sw-cms.elements.imageSlider.config.label.navigationDots')"
-                                                        @change="emitUpdateEl"
-                                                >
 
-                                                    <option :value="null">
-                                                        {{ $tc('sw-cms.elements.imageSlider.config.label.navigationPositionNone') }}
-                                                    </option>
-                                                    <option value="inside">
-                                                        {{ $tc('sw-cms.elements.imageSlider.config.label.navigationPositionInside') }}
-                                                    </option>
-                                                    <option value="outside">
-                                                        {{ $tc('sw-cms.elements.imageSlider.config.label.navigationPositionOutside') }}
-                                                    </option>
-                                                </sw-field>
-                                            {% endblock %}
                                         </div>
                                     </div>
                                 {% endblock %}
 
                                 {% block sw_cms_element_tcbslider_config_settings_links %}
                                     <div class="sw-cms-el-config-tcbslider__settings-links sw-cms-el-config-tcbslider__setting-option">
-                                        <div
-                                                v-for="(tcbSliderItem, index) in items"
-                                                :key="index"
-                                                class="sw-cms-el-config-tcbslider__settings-link"
-                                        >
 
-                                            {% block sw_cms_element_tcbslider_config_settings_link_url %}
-                                                <sw-field
-                                                        :key="tcbSliderItem.mediaId"
-                                                        v-model="tcbSliderItem.url"
-                                                        class="sw-cms-el-config-tcbslider__settings-link-input"
-                                                        :name="tcbSliderItem.mediaUrl"
-                                                        type="text"
-                                                        :label="$tc('sw-cms.elements.image.config.label.linkTo')"
-                                                        :placeholder="$tc('sw-cms.elements.image.config.placeholder.enterUrl')"
-                                                >
-                                                    <template #prefix>
-                                                        <img
-                                                                v-if="tcbSliderItem.mediaUrl"
-                                                                class="sw-cms-el-config-tcbslider__settings-link-prefix"
-                                                                :src="tcbSliderItem.mediaUrl"
-                                                                alt=""
-                                                        >
-                                                    </template>
-                                                </sw-field>
-                                            {% endblock %}
-
-                                            {% block sw_cms_element_tcbslider_config_settings_link_target %}
-                                                <sw-field
-                                                        v-model="tcbSliderItem.newTab"
-                                                        class="sw-cms-el-config-tcbslider__settings-link-tab"
-                                                        type="switch"
-                                                        :name="tcbSliderItem.mediaId"
-                                                        :label="$tc('sw-cms.elements.image.config.label.linkNewTab')"
-                                                />
-                                            {% endblock %}
-                                        </div>
                                     </div>
                                 {% endblock %}
                             </div>

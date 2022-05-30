@@ -30,18 +30,13 @@ Shopware.Service('cmsService').registerCmsBlock({
             default: {
                 config: {},
                 data: {
-                    tcbSliderItems: {
+                    tcbSlide1Image: {
+                        value: 'bundles/tcbcreativecave/img/slide.jpg',
                         source: 'static',
-                        value: [
-                            {
-                                url: 'public/img/slide.jpg',
-                                newTab: false,
-                                mediaId: null,
-                                fileName: '',
-                                mediaUrl: null,
-                            },
-                        ],
                     },
+                    tcbSlide1Title: {
+                        value: 'TheCodeBunny Advanced <br/> Slider'
+                    }
                 },
             },
         },

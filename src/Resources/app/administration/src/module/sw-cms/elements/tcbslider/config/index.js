@@ -26,10 +26,8 @@ Component.register('sw-cms-el-config-tcbslider', {
 
     data() {
         return {
-            mediaModalIsOpen: false,
-            initialFolderId: null,
-            entity: this.element,
-            mediaItems: [],
+            image1ModalIsOpen: false,
+            initialFolderId: null
         };
     },
 
@@ -46,12 +44,12 @@ Component.register('sw-cms-el-config-tcbslider', {
             return this.cmsPageState.pageEntityName;
         },
 
-        items() {
-            if (this.element.config && this.element.config.tcbSliderItems && this.element.config.tcbSliderItems.value) {
-                return this.element.config.tcbSliderItems.value;
+        previewSource() {
+            if (this.element.data && this.element.data.tcbSlide1Image && this.element.data.tcbSlide1Image.id) {
+                return this.element.data.tcbSlide1Image;
             }
 
-            return [];
+            return this.element.config.tcbSlide1Image.value;
         },
     },
 
@@ -62,129 +60,53 @@ Component.register('sw-cms-el-config-tcbslider', {
     methods: {
         async createdComponent() {
             this.initElementConfig('tcbslider');
-            if (this.element.config.tcbSliderItems.source !== 'default' && this.element.config.tcbSliderItems.value.length > 0) {
-                const mediaIds = this.element.config.tcbSliderItems.value.map((configElement) => {
-                    return configElement.mediaId;
-                });
-
-                const criteria = new Criteria();
-                criteria.setIds(mediaIds);
-
-                const searchResult = await this.mediaRepository.search(criteria);
-                this.mediaItems = mediaIds.map((mediaId) => {
-                    return searchResult.get(mediaId);
-                });
-            }
         },
 
-        onImageUpload(mediaItem) {
-            const tcbSliderItems = this.element.config.tcbSliderItems;
-            if (tcbSliderItems.source === 'default') {
-                tcbSliderItems.value = [];
-                tcbSliderItems.source = 'static';
-            }
+        async onImage1Upload({ targetId }) {
+            const mediaEntity = await this.mediaRepository.get(targetId);
 
-            tcbSliderItems.value.push({
-                mediaUrl: mediaItem.url,
-                mediaId: mediaItem.id,
-                url: null,
-                newTab: false,
-            });
+            this.element.config.tcbSlide1Image.value = mediaEntity.id;
+            this.element.config.tcbSlide1Image.source = 'static';
 
-            console.log(mediaItem);
-
-            this.mediaItems.push(mediaItem);
-
-            this.updateMediaDataValue();
-            this.emitUpdateEl();
-        },
-
-        onItemRemove(mediaItem, index) {
-            const key = mediaItem.id;
-            const { value } = this.element.config.tcbSliderItems;
-
-            this.element.config.tcbSliderItems.value = value.filter(
-                (item, i) => {
-                    return (item.mediaId !== key || i !== index);
-                },
-            );
-
-            this.mediaItems = this.mediaItems.filter(
-                (item, i) => {
-                    return (item.id !== key || i !== index);
-                },
-            );
-
-            this.updateMediaDataValue();
-            this.emitUpdateEl();
-        },
-
-        onCloseMediaModal() {
-            this.mediaModalIsOpen = false;
-        },
-
-        onMediaSelectionChange(mediaItems) {
-            const tcbSliderItems = this.element.config.tcbSliderItems;
-            if (tcbSliderItems.source === 'default') {
-                tcbSliderItems.value = [];
-                tcbSliderItems.source = 'static';
-            }
-
-            mediaItems.forEach((item) => {
-                this.element.config.tcbSliderItems.value.push({
-                    mediaUrl: item.url,
-                    mediaId: item.id,
-                    url: null,
-                    newTab: false,
-                });
-            });
-
-            this.mediaItems.push(...mediaItems);
-
-            this.updateMediaDataValue();
-            this.emitUpdateEl();
-        },
-
-        updateMediaDataValue() {
-            if (this.element.config.tcbSliderItems.value) {
-                const tcbSliderItems = cloneDeep(this.element.config.tcbSliderItems.value);
-
-                tcbSliderItems.forEach((tcbSliderItem) => {
-                    this.mediaItems.forEach((mediaItem) => {
-                        if (tcbSliderItem.mediaId === mediaItem.id) {
-                            tcbSliderItem.media = mediaItem;
-                        }
-                    });
-                });
-
-                if (!this.element.data) {
-                    this.$set(this.element, 'data', { tcbSliderItems });
-                } else {
-                    this.$set(this.element.data, 'tcbSliderItems', tcbSliderItems);
-                }
-            }
-        },
-
-        onOpenMediaModal() {
-            this.mediaModalIsOpen = true;
-        },
-
-        onChangeMinHeight(value) {
-            this.element.config.minHeight.value = value === null ? '' : value;
+            this.updateElementData(mediaEntity);
 
             this.$emit('element-update', this.element);
         },
 
-        onChangeDisplayMode(value) {
-            if (value === 'cover') {
-                this.element.config.verticalAlign.value = null;
-            }
+        onImage1Remove() {
+            this.element.config.tcbSlide1Image.value = null;
+
+            this.updateElementData();
 
             this.$emit('element-update', this.element);
         },
 
-        emitUpdateEl() {
+        onCloseImage1Modal() {
+            this.image1ModalIsOpen = false;
+        },
+
+        onSelection1Changes(mediaEntity) {
+            const media = mediaEntity[0];
+            this.element.config.tcbSlide1Image.value = media.id;
+            this.element.config.tcbSlide1Image.source = 'static';
+
+            this.updateElementData(media);
+
             this.$emit('element-update', this.element);
+        },
+
+        updateElementData(media = null) {
+            const mediaId = media === null ? null : media.id;
+            if (!this.element.data) {
+                this.$set(this.element, 'data', { mediaId, media });
+            } else {
+                this.$set(this.element.data, 'mediaId', mediaId);
+                this.$set(this.element.data, 'media', media);
+            }
+        },
+
+        onOpenImage1Modal() {
+            this.image1ModalIsOpen = true;
         },
     },
 });

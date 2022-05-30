@@ -19,27 +19,22 @@ Shopware.Service('cmsService').registerCmsElement({
     configComponent: 'sw-cms-el-config-tcbslider',
     previewComponent: 'sw-cms-el-preview-tcbslider',
     defaultConfig: {
-        tcbSlideImage: {
+        tcbSlide1Image: {
             source: 'static',
             value: '',
-            required: true
+            required: true,
+            entity: {
+                name: 'tcbSlide1Image',
+            }
         },
         tcbSlide1Title: {
             source: 'static',
             value: '',
             required: true
         },
-        tcbSliderItems: {
-            source: 'static',
-            value: [],
-            required: true,
-            entity: {
-                name: 'media',
-            },
-        },
         navigationArrows: {
             source: 'static',
-            value: 'inside',
+            value: 'outside',
         },
         navigationDots: {
             source: 'static',
@@ -57,32 +52,5 @@ Shopware.Service('cmsService').registerCmsElement({
             source: 'static',
             value: null,
         },
-    },
-    enrich: function enrich(elem, data) {
-        if (Object.keys(data).length < 1) {
-            return;
-        }
-
-        Object.keys(elem.config).forEach((configKey) => {
-            const entity = elem.config[configKey].entity;
-
-            if (!entity) {
-                return;
-            }
-
-            const entityKey = entity.name;
-            if (!data[`entity-${entityKey}`]) {
-                return;
-            }
-
-            elem.data[configKey] = [];
-            elem.config[configKey].value.forEach((tcbSliderItem) => {
-                elem.data[configKey].push({
-                    newTab: tcbSliderItem.newTab,
-                    url: tcbSliderItem.url,
-                    media: data[`entity-${entityKey}`].get(tcbSliderItem.mediaId),
-                });
-            });
-        });
-    },
+    }
 });

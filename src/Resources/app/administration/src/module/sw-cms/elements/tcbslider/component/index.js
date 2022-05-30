@@ -7,7 +7,6 @@
  * Website: https://hemangvyas.com
  * Email: hemang@hemangvyas.com
  */
-
 import template from './sw-cms-el-tcbslider.html.twig';
 import './sw-cms-el-tcbslider.scss';
 
@@ -22,45 +21,7 @@ Component.register('sw-cms-el-tcbslider', {
         Mixin.getByName('cms-element'),
     ],
 
-    props: {
-        activeMedia: {
-            type: [Object, null],
-            required: false,
-            default: null,
-        },
-    },
-
-    data() {
-        return {
-            columnCount: 7,
-            columnWidth: 90,
-            sliderPos: 0,
-            imgPath: 'tcbcreativecave/img/slide.jpg',
-            imgSrc: '',
-        };
-    },
-
     computed: {
-        gridAutoRows() {
-            return `grid-auto-rows: ${this.columnWidth}`;
-        },
-
-        uploadTag() {
-            return `cms-element-media-config-${this.element.id}`;
-        },
-
-        tcbSliderItems() {
-            if (this.element?.config?.tcbSliderItems?.source === 'mapped') {
-                return this.getDemoValue(this.element.config.tcbSliderItems.value) || [];
-            }
-
-            if (this.element.data && this.element.data.tcbSliderItems && this.element.data.tcbSliderItems.length > 0) {
-                return this.element.data.tcbSliderItems;
-            }
-
-            return [];
-        },
-
         displayModeClass() {
             if (this.element.config.displayMode.value === 'standard') {
                 return null;
@@ -70,15 +31,56 @@ Component.register('sw-cms-el-tcbslider', {
         },
 
         styles() {
-            if (this.element.config.displayMode.value === 'cover' &&
+            return {
+                'min-height': this.element.config.displayMode.value === 'cover' &&
                 this.element.config.minHeight.value &&
-                this.element.config.minHeight.value !== 0) {
-                return {
-                    'min-height': this.element.config.minHeight.value,
-                };
+                this.element.config.minHeight.value !== 0 ? this.element.config.minHeight.value : '340px',
+            };
+        },
+
+        imgStyles() {
+            return {
+                'align-self': this.element.config.verticalAlign.value || null,
+            };
+        },
+
+        mediaUrl() {
+            const fallBackImageFileName = 'bundles/tcbcreativecave/img/slide.jpg';
+            const staticFallBackImage = 'bundles/tcbcreativecave/img/slide.jpg';
+            const elemData = this.element.data.tcbSlide1Image;
+            const elemConfig = this.element.config.tcbSlide1Image;
+
+            console.log(this.element);
+
+            if (elemConfig.source === 'mapped') {
+                const demoMedia = this.getDemoValue(elemConfig.value);
+
+                if (demoMedia?.url) {
+                    return demoMedia.url;
+                }
+
+                return staticFallBackImage;
             }
 
-            return {};
+            if (elemConfig.source === 'default') {
+                // use only the filename
+                const fileName = elemConfig.value.slice(elemConfig.value.lastIndexOf('/') + 1);
+                return this.assetFilter(`/administration/static/img/cms/${fileName}`);
+            }
+
+            if (elemData?.id) {
+                return this.element.data.tcbSlide1Image.url;
+            }
+
+            if (elemData?.url) {
+                return this.assetFilter(elemConfig.url);
+            }
+
+            return staticFallBackImage;
+        },
+
+        assetFilter() {
+            return Filter.getByName('asset');
         },
 
         outsideNavArrows() {
@@ -112,36 +114,23 @@ Component.register('sw-cms-el-tcbslider', {
 
             return `align-self: ${this.element.config.verticalAlign.value};`;
         },
-
-        assetFilter() {
-            return Filter.getByName('asset');
-        },
     },
 
     watch: {
-        // @deprecated tag:v6.5.0 use tcbSliderItems instead
-        'element.data.tcbSliderItems': {
-            handler() {
-                return null;
-            },
+        cmsPageState: {
             deep: true,
+            handler() {
+                this.$forceUpdate();
+            },
         },
 
-        tcbSliderItems: {
-            handler() {
-                if (this.tcbSliderItems && this.tcbSliderItems.length > 0) {
-                    this.imgSrc = this.tcbSliderItems[0].media.url;
-                    this.$emit('active-image-change', this.tcbSliderItems[0].media);
-                } else {
-                    this.imgSrc = this.assetFilter(this.imgPath);
-                }
-            },
-            deep: true,
-        },
+        mediaConfigValue(value) {
+            const mediaId = this.element?.data?.tcbSlide1Image?.id;
+            const isSourceStatic = this.element?.config?.tcbSlide1Image?.source === 'static';
 
-        activeMedia() {
-            this.sliderPos = this.activeMedia.sliderIndex;
-            this.imgSrc = this.activeMedia.url;
+            if (isSourceStatic && mediaId && value !== mediaId) {
+                this.element.config.tcbSlide1Image.value = mediaId;
+            }
         },
     },
 
@@ -153,45 +142,12 @@ Component.register('sw-cms-el-tcbslider', {
         createdComponent() {
             this.initElementConfig('tcbslider');
             this.initElementData('tcbslider');
-
-            if (this.tcbSliderItems && this.tcbSliderItems.length > 0) {
-                this.imgSrc = this.tcbSliderItems[0].media.url;
-                this.$emit('active-image-change', this.tcbSliderItems[this.sliderPos].media);
-            } else {
-                this.imgSrc = this.assetFilter(this.imgPath);
-            }
-        },
-
-        setSliderItem(mediaItem, index) {
-            this.imgSrc = mediaItem.url;
-            this.sliderPos = index;
-            this.$emit('active-image-change', mediaItem, index);
-        },
-
-        activeButtonClass(url) {
-            return {
-                'is--active': this.imgSrc === url,
-            };
         },
 
         setSliderArrowItem(direction = 1) {
-            if (this.tcbSliderItems.length < 2) {
-                return;
-            }
 
             this.sliderPos += direction;
 
-            if (this.sliderPos < 0) {
-                this.sliderPos = this.tcbSliderItems.length - 1;
-            }
-
-            if (this.sliderPos > this.tcbSliderItems.length - 1) {
-                this.sliderPos = 0;
-            }
-
-            this.imgSrc = this.tcbSliderItems[this.sliderPos].media.url;
-            this.$emit('active-image-change', this.tcbSliderItems[this.sliderPos].media, this.sliderPos);
-            this.$emit('active-image-change', this.tcbSliderItems[this.sliderPos].media, this.sliderPos);
         },
     },
 });
