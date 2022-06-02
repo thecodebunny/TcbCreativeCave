@@ -1,5 +1,7 @@
 {%  block sw_cms_block_tcbslider %}
     <div class="sw-cms-block-tcbslider">
-        <slot name="tcbSlider"></slot>
+        <slot name="tcbSlider">
+            {% block sw_cms_block_tcbslider_slot_slider %}{% endblock %}
+        </slot>
     </div>
 {% endblock %}

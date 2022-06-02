@@ -17,7 +17,6 @@ const Criteria = Shopware.Data.Criteria;
 
 Component.register('sw-cms-el-config-tcbslider', {
     template,
-
     inject: ['repositoryFactory'],
 
     mixins: [
@@ -26,7 +25,7 @@ Component.register('sw-cms-el-config-tcbslider', {
 
     data() {
         return {
-            image1ModalIsOpen: false,
+            mediaModal1IsOpen: false,
             initialFolderId: null
         };
     },
@@ -81,11 +80,11 @@ Component.register('sw-cms-el-config-tcbslider', {
             this.$emit('element-update', this.element);
         },
 
-        onCloseImage1Modal() {
-            this.image1ModalIsOpen = false;
+        onCloseModal1() {
+            this.mediaModal1IsOpen = false;
         },
 
-        onSelection1Changes(mediaEntity) {
+        onSelectionChangesImage1(mediaEntity) {
             const media = mediaEntity[0];
             this.element.config.tcbSlide1Image.value = media.id;
             this.element.config.tcbSlide1Image.source = 'static';
@@ -105,8 +104,9 @@ Component.register('sw-cms-el-config-tcbslider', {
             }
         },
 
-        onOpenImage1Modal() {
-            this.image1ModalIsOpen = true;
+        onOpenModal1() {
+            console.log(this);
+            this.mediaModal1IsOpen = true;
         },
     },
 });
